@@ -1,7 +1,7 @@
 # Allocation
 
 ## What It Is
-An explicit assignment of money from a FundingBatch to a specific Need with a precise amount.
+An explicit assignment of money from a [FundingBatch](../fundingbatch.md) to a specific [Need](../need.md) with a precise amount.
 
 ## Purpose
 Solves the many-to-many relationship complexity between funding sources and individual recipients by creating trackable records of exactly which money goes to which recipient.
@@ -10,15 +10,15 @@ Solves the many-to-many relationship complexity between funding sources and indi
 Without Allocation records, the system cannot handle partial funding scenarios OR efficient bulk operations. 
 
 For example: 
-- if Jon's food Need costs 400,000 KES but is funded by (A) 50,000 KES from FundingBatch StudentNutritionMarch2025 and (B) 350,000 KES from FundingBatch EmergencyResponseApril2025, there's no way to track this relationship. 
-- Additionally, when a NeedPackage contains 50 students requiring transport, manually creating 50 individual funding links would be operationally impractical. 
+- if Jon's food [Need](../need.md) costs 400,000 KES but is funded by (A) 50,000 KES from [FundingBatch](../fundingbatch.md) StudentNutritionMarch2025 and (B) 350,000 KES from [FundingBatch](../fundingbatch.md) EmergencyResponseApril2025, there's no way to track this relationship. 
+- Additionally, when a [NeedPackage](../needpackage.md) contains 50 students requiring transport, manually creating 50 individual funding links would be operationally impractical. 
 - You'd end up with disconnected records like "Jon food part 1" and "Jon food part 2" with no clear connection, making it impossible to see that Jon actually received 400,000 KES total for food or which funding sources contributed what amounts. 
 - Allocation records enable both complex funding scenarios and automated bulk operations while maintaining perfect traceability.
 
 ## Key Relationships
-- Parent: FundingBatch (source of the money)
+- Parent: [FundingBatch](../fundingbatch.md) (source of the money)
 - Children: None
-- Links to: Need (recipient of the money)
+- Links to: [Need](../need.md) (recipient of the money)
 
 ## Fields
 
@@ -42,7 +42,7 @@ For example:
 - **Modified Date** (Auto): Last update timestamp
 
 ## Rules
-- Auto-allocation creates Allocations when FundingBatch is linked to NeedPackages and amounts match exactly
+- Auto-allocation creates [Allocation](../allocation.md)s when [FundingBatch](../fundingbatch.md) is linked to [NeedPackage](../needpackage.md)s and amounts match exactly
 - Recalculation deletes all existing Allocations for a FundingBatch and recreates them based on current linked Needs
 - Auto-generated Allocations follow naming pattern "FundingBatchName_NeedName"
 - When exceptions occur (amount mismatches, obsolete Needs), FundingBatch switches to manual allocation mode
@@ -64,7 +64,7 @@ Jon's food Need costs 400,000 KES but gets funded from two sources:
 
 **Example 2 - Auto-allocation with exception handling**:
 Bulk transport scenario with complications:
-1. User creates NeedPackage "MediumDistanceTransportMarch2025" with 50 individual student Needs totaling 500,000 KES
+1. User creates [NeedPackage](../needpackage.md) "MediumDistanceTransportMarch2025" with 50 individual student [Need](../need.md)s totaling 500,000 KES
 2. User creates FundingBatch "RegularOperationsMarch2025" (500,000 KES) and links it to the transport NeedPackage
 3. Automation detects amounts match exactly and auto-creates 50 Allocation records like "RegularOperationsMarch2025_MaryTransportNeed", "RegularOperationsMarch2025_PeterTransportNeed"
 4. User discovers one student's transport cost increased from 10,000 to 15,000 KES
