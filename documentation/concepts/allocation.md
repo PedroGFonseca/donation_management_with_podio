@@ -23,9 +23,9 @@ For example:
 ## Fields
 
 ### User Input Fields
-- **Amount** (Money): Specific amount allocated from batch to need
-- **FundingBatch** (App): Source batch providing the money
-- **Need** (App): Individual need receiving the allocation
+- **Amount** (Money): Specific amount allocated from [FundingBatch](../fundingbatch.md) to Need
+- **FundingBatch** (App): Source FundingBatch providing the money
+- **Need** (App): Individual Need receiving the allocation
 - **Allocation Date** (Date): When allocation was created
 - **Notes** (Text): Context for this allocation decision
 - **Receipt Reference** (Text): Link to confirmation documentation

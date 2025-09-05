@@ -40,15 +40,15 @@ To organize related funding requests into manageable units that can mix multiple
 - **Created Date** (Date): When this package was created
 - **Last Updated** (Date): Most recent modification
 - **Need Count** (Calculated Number): Total number of individual [Need](../need.md)s in this package
-- **Type Summary** (Calculated Text): Auto-generated breakdown of need types (e.g., "Transport: 25 needs (83%), Education: 5 needs (17%)")
+- **Type Summary** (Calculated Text): Auto-generated breakdown of Need types (e.g., "Transport: 25 Needs (83%), Education: 5 Needs (17%)")
 
 ## Rules
-- [NeedPackage](../needpackage.md) can contain multiple recipients and multiple need types within the same package
+- [NeedPackage](../needpackage.md) can contain multiple recipients and multiple Need types within the same package
 - All child Needs must use the same currency as the NeedPackage
 - Status automatically calculated: "Paid" when all Needs paid, "Partially Paid" when any Needs paid
 - Total Amount, Need Count, and Type Summary automatically update when child Needs change
 - Distribution Type determines how individual Needs are generated from the package
-- Individual child Needs maintain atomic principle: one recipient + one need type + one amount per Need
+- Individual child Needs maintain atomic principle: one recipient + one Need type + one amount per Need
 - Unique Recipients count handles cases where one person appears in multiple Needs (e.g., John needs both fees and uniforms)
 - Bulk action "Mark all Accepted Needs as Paid" updates allocation statuses for Needs with status "Accepted", which then propagates to Need status recalculation
 - For audit purposes, NeedPackages should be marked as obsolete/cancelled rather than deleted to preserve financial history

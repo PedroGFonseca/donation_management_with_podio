@@ -21,7 +21,7 @@ The [Need](../need.md) entity enables both clean UI management (through [NeedPac
 - **Recipient** ([Person](../person.md)/[School](../school.md)/[Group](../group.md)): The specific individual or entity who will receive this funding
 - **Priority** (Single Select): Low, Medium, High, Urgent
 - **Type** (Single Select): Education, Medical, Food, Transport, Emergency, Infrastructure, Other
-- **Title** (Text): Descriptive title for this specific need (auto-generated if from template)
+- **Title** (Text): Descriptive title for this specific Need (auto-generated if from template)
 - **Description** (Text Area): Detailed description of the specific requirement
 - **Currency** (Single Select): Currency for the amount (defaults to foundation's default currency)
 - **Deadline** (Date): When funding is needed by
@@ -33,20 +33,20 @@ The [Need](../need.md) entity enables both clean UI management (through [NeedPac
 - **Status** (Single Select): New, Accepted, Declined, Allocated, Paid, Failed, Cancelled - Auto-calculated based on allocation status: "Allocated" when allocations exist, "Paid" when sum(successful allocations) >= need amount, but can be manually overridden for operational exceptions
 
 ### Strictly Automated Fields
-- **Allocated Amount** (Calculated Money): Sum of all successful [Allocation](../allocation.md) amounts for this need
+- **Allocated Amount** (Calculated Money): Sum of all successful [Allocation](../allocation.md) amounts for this Need
 - **Remaining Amount** (Calculated Money): Amount - Allocated Amount
 
 ### System Fields
 - **NeedPackage ID** (Relationship): Links to parent [NeedPackage](../needpackage.md)
 - **Template Reference** (Relationship): Links to [NeedTemplate](../needtemplate.md) if generated from template
-- **Created Date** (Date): When this need was created
+- **Created Date** (Date): When this Need was created
 - **Last Updated** (Date): Most recent modification
 
 ## Rules
 - [Need](../need.md) must have exactly one specific recipient ([Person](../person.md), [School](../school.md), or [Group](../group.md))
 - Need must have exactly one specific Type - no mixed reasons at the individual recipient level (e.g., if John needs both school fees and uniforms, create two separate Needs: "John, Education, 50,000 KES" and "John, Transport, 15,000 KES")
 - Amount must be positive and in valid currency
-- Status automatically calculated based on allocation status: "Allocated" when allocations exist, "Paid" when sum(successful allocations) >= need amount
+- Status automatically calculated based on allocation status: "Allocated" when allocations exist, "Paid" when sum(successful allocations) >= Need amount
 - Status can also be updated via parent NeedPackage bulk actions (e.g., "Mark all Accepted Needs as Paid")
 - Recipient type must match NeedPackage distribution rules
 - Currency must match parent NeedPackage currency
