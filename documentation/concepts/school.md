@@ -1,4 +1,4 @@
-# [Concept Name]
+# School
 
 ## What It Is
 [One sentence definition]

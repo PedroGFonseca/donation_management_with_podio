@@ -1,10 +1,14 @@
-# Need Package
+# Local partner
 
 ## What It Is
-[One sentence definition]
+Describes an organization/person who is providing the foundation with services on the ground 
 
 ## Purpose
-[Why this concept exists in the system]
+Certain partners are necessary for performing tasks the foundation cannot do on the ground, such as 
+- Distributing funds 
+- Vetting schools 
+- Checking in on scholars 
+- Transporting goods 
 
 ## Why it is needed 
 
@@ -16,6 +20,11 @@
 ## Fields
 <!-- Use - **Name** (Type): descrition-->
 <!-- For instance - **Amount** (Money): Amount needed for this recipient -->
+
+Type: 
+- Strategic partner 
+- Local NGO 
+- Paid contractor 
 
 ### Core Fields
 

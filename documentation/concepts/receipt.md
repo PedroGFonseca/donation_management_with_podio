@@ -1,4 +1,4 @@
-# [Concept Name]
+# Receipt
 
 ## What It Is
 [One sentence definition]

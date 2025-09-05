@@ -1,4 +1,4 @@
-# [Concept Name]
+# Transaction
 
 ## What It Is
 [One sentence definition]

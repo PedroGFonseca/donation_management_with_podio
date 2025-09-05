@@ -1,4 +1,4 @@
-# [Concept Name]
+# Funding Batch
 
 ## What It Is
 [One sentence definition]

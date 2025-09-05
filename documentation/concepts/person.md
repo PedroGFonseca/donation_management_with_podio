@@ -1,4 +1,4 @@
-# [Concept Name]
+# Person
 
 ## What It Is
 [One sentence definition]

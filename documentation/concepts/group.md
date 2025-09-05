@@ -1,4 +1,4 @@
-# [Concept Name]
+# Group
 
 ## What It Is
 [One sentence definition]
