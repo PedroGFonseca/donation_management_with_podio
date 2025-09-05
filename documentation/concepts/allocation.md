@@ -3,11 +3,19 @@
 ## What It Is
 An explicit assignment of money from a FundingBatch to a specific Need with a precise amount.
 
-## Why It Is Needed
-Without Allocation records, the system cannot handle partial funding scenarios OR efficient bulk operations. For example, if Jon's food Need costs 400,000 KES but is funded by 50,000 KES from FundingBatch StudentNutritionMarch2025 and 350,000 KES from FundingBatch EmergencyResponseApril2025, there's no way to track this relationship. Additionally, when a NeedPackage contains 50 students requiring transport, manually creating 50 individual funding links would be operationally impractical. You'd end up with disconnected records like "Jon food part 1" and "Jon food part 2" with no clear connection, making it impossible to see that Jon actually received 400,000 KES total for food or which funding sources contributed what amounts. Allocation records enable both complex funding scenarios and automated bulk operations while maintaining perfect traceability.
-
 ## Purpose
 Solves the many-to-many relationship complexity between funding sources and individual recipients by creating trackable records of exactly which money goes to which recipient.
+
+
+## Why It Is Needed
+Without Allocation records, the system cannot handle partial funding scenarios OR efficient bulk operations. 
+
+For example: 
+- if Jon's food Need costs 400,000 KES but is funded by (A) 50,000 KES from FundingBatch StudentNutritionMarch2025 and (B) 350,000 KES from FundingBatch EmergencyResponseApril2025, there's no way to track this relationship. 
+- Additionally, when a NeedPackage contains 50 students requiring transport, manually creating 50 individual funding links would be operationally impractical. 
+- You'd end up with disconnected records like "Jon food part 1" and "Jon food part 2" with no clear connection, making it impossible to see that Jon actually received 400,000 KES total for food or which funding sources contributed what amounts. 
+- Allocation records enable both complex funding scenarios and automated bulk operations while maintaining perfect traceability.
+
 
 ## Key Relationships
 - Parent: FundingBatch (source of the money)
