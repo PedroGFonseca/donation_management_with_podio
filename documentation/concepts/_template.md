@@ -14,16 +14,16 @@
 - Links to: [What this connects to]
 
 ## Fields
-<!-- Use - **Name** (Type): descrition-->
+<!-- Use - **Name** (Type): description-->
 <!-- For instance - **Amount** (Money): Amount needed for this recipient -->
 
-### Core Fields
+### User Input Fields
 
-### Administrative Fields  
+### Mixed Fields
 
+### Strictly Automated Fields
 
-### Optional Fields
-
+### Buttons/Bulk Actions
 
 ### System Fields
 

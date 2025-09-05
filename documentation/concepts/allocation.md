@@ -6,7 +6,6 @@ An explicit assignment of money from a FundingBatch to a specific Need with a pr
 ## Purpose
 Solves the many-to-many relationship complexity between funding sources and individual recipients by creating trackable records of exactly which money goes to which recipient.
 
-
 ## Why It Is Needed
 Without Allocation records, the system cannot handle partial funding scenarios OR efficient bulk operations. 
 
@@ -16,7 +15,6 @@ For example:
 - You'd end up with disconnected records like "Jon food part 1" and "Jon food part 2" with no clear connection, making it impossible to see that Jon actually received 400,000 KES total for food or which funding sources contributed what amounts. 
 - Allocation records enable both complex funding scenarios and automated bulk operations while maintaining perfect traceability.
 
-
 ## Key Relationships
 - Parent: FundingBatch (source of the money)
 - Children: None
@@ -24,19 +22,19 @@ For example:
 
 ## Fields
 
-### Core Fields
+### User Input Fields
 - **Amount** (Money): Specific amount allocated from batch to need
 - **FundingBatch** (App): Source batch providing the money
 - **Need** (App): Individual need receiving the allocation
-- **Status** (Category): Pending | Successful | Failed | Cancelled
-
-### Administrative Fields  
-- **Creation Method** (Category): "Manual" | "Auto-Generated"
 - **Allocation Date** (Date): When allocation was created
 - **Notes** (Text): Context for this allocation decision
-
-### Optional Fields
 - **Receipt Reference** (Text): Link to confirmation documentation
+
+### Mixed Fields
+- **Status** (Category): Pending | Successful | Failed | Cancelled - Can be auto-calculated based on funding confirmation but manually overridden for operational exceptions
+
+### Strictly Automated Fields
+- **Creation Method** (Category): "Manual" | "Auto-Generated"
 
 ### System Fields
 - **ID** (Auto): Unique identifier
@@ -51,8 +49,10 @@ For example:
 - One allocation per FundingBatch-Need pairing (no duplicates)
 - Allocation amount cannot exceed FundingBatch available credit
 - Sum of all allocations for a Need determines Need status (Paid when sum ≥ Need amount)
+- Allocation status can be updated via parent NeedPackage bulk actions (e.g., "Mark all Accepted Needs as Paid")
 - FundingBatch.allocated_amount = sum of all allocation amounts regardless of status
 - Money becomes fungible within FundingBatch - doesn't matter which specific transaction funded the allocation
+- For audit purposes, Allocations should be marked as obsolete/cancelled rather than deleted to preserve financial history
 
 ## Examples
 

@@ -50,6 +50,7 @@ NeedPackage solves the granularity dilemma by enabling clean UI organization wit
 - Distribution Type determines how individual Needs are generated from the package
 - Individual child Needs maintain atomic principle: one recipient + one need type + one amount per Need
 - Unique Recipients count handles cases where one person appears in multiple Needs (e.g., John needs both fees and uniforms)
+- Bulk action "Mark all Accepted Needs as Paid" updates allocation statuses for Needs with status "Accepted", which then propagates to Need status recalculation
 - For audit purposes, NeedPackages should be marked as obsolete/cancelled rather than deleted to preserve financial history
 
 ## Examples
