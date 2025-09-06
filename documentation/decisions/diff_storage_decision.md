@@ -51,15 +51,44 @@ Capture individual field changes with attribution when available, ensuring no ch
 - Change Date (Date): When change occurred  
 - Old Value (Text): Previous value
 - New Value (Text): New value
-- Changed By (Person): Who made change (null when unavailable)
+- Changed By (Person): Human who made direct change (null for automation)
+- Triggered By (Person): Human who triggered automation (null for scheduled automation)
+- Change Type (Select): "Manual", "User-Triggered Automation", "Scheduled Automation", "Webhook Automation"
+- Automation Context (Text): What triggered the automation (e.g., "Allocation created", "Daily status recalculation", "Bulk action: Mark all Accepted Needs as Paid")
 - Source (Select): "Podio Revision", "Daily State Comparison"
-- Attribution Available (Checkbox): Whether "who changed" is known
+- Attribution Available (Checkbox): Whether complete attribution chain is known
 ```
 
 ### Daily Capture Process
 1. **Podio revision reading**: Store all revisions from last 24 hours (Source="Podio Revision")
 2. **State comparison**: Compare current snapshots vs yesterday's snapshots (Source="Daily State Comparison")
-3. **Accept duplication**: Both sources stored, deduplication handled at analysis time
+3. **Attribution enhancement**: Correlate changes with System Messages to determine automation context
+4. **Accept duplication**: Both sources stored, deduplication handled at analysis time
+
+### Attribution Logic
+**Manual Changes:**
+- Changed By: User who made the change
+- Triggered By: null
+- Change Type: "Manual"
+- Automation Context: null
+
+**User-Triggered Automation:**
+- Changed By: null  
+- Triggered By: User who triggered it
+- Change Type: "User-Triggered Automation"
+- Automation Context: Derived from System Messages (e.g., "Allocation created for Need N123", "Bulk action: Mark all Accepted Needs as Paid")
+
+**Scheduled Automation:**
+- Changed By: null
+- Triggered By: null
+- Change Type: "Scheduled Automation"  
+- Automation Context: "Daily status recalculation", "Monthly report generation", etc.
+
+**Webhook Automation:**
+- Changed By: null
+- Triggered By: User who made the triggering change (when determinable)
+- Change Type: "Webhook Automation"
+- Automation Context: "Status inheritance from Need N123 payment", "FundingBatch credit recalculation", etc.
 
 ## MonthlyBackups App Design
 
@@ -132,7 +161,8 @@ Automated export of complete current state for all apps as CSV files, stored in 
 **Complete Audit Coverage:**
 - SystemDiffs ensures no changes ever lost (state comparison safety net)
 - MonthlyBackups provide complete baseline snapshots
-- Attribution captured when available (Podio revisions)
+- Full attribution chain captured for both manual and automated changes
+- Automation context preserved through System Messages integration
 - 7-year retention guaranteed independent of Podio
 
 **Operational Reliability:**
@@ -152,8 +182,10 @@ Automated export of complete current state for all apps as CSV files, stored in 
 **Daily Automation:**
 - Snapshot all app current states
 - Read Podio revisions for all apps (last 24 hours)
+- Parse System Messages for automation context
 - Calculate state diffs vs previous day
-- Store both revision and state comparison data in SystemDiffs
+- Enhance attribution using automation context correlation
+- Store both revision and state comparison data in SystemDiffs with full attribution
 
 **Monthly Automation:**
 - Export all apps as CSV
@@ -164,6 +196,9 @@ Automated export of complete current state for all apps as CSV files, stored in 
 - Detailed activity queries: Filter Source="Podio Revision"
 - Complete coverage queries: Deduplicate across both sources
 - Attribution gap analysis: Identify "Daily State Comparison" without corresponding "Podio Revision"
+- Automation impact analysis: Track user actions and their automated consequences
+- Trigger chain reconstruction: Follow "Triggered By" relationships to understand cascading effects
+- Manual vs automated change analysis: Filter by Change Type for operational insights
 - Historical reconstruction: Combine monthly baselines with SystemDiffs
 
 ## Storage Projections
@@ -182,12 +217,14 @@ Automated export of complete current state for all apps as CSV files, stored in 
 
 This approach succeeds if:
 - 100% change detection achieved across all apps
-- Attribution captured for 99%+ of normal operations (under 30 revisions/day)
-- ANBI 7-year retention requirement satisfied
-- Historical reconstruction possible for any date
+- Complete attribution chain captured for both manual and automated changes
+- Automation context preserved for operational debugging and audit trails
+- ANBI 7-year retention requirement satisfied with full audit transparency
+- Historical reconstruction possible for any date with attribution details
 - System resilient to Podio account issues
 - Implementation complexity remains manageable
 - Audit queries performant and comprehensive
+- Automation impact traceable through trigger chain analysis
 
 ---
 
