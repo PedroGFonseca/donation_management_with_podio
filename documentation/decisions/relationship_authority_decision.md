@@ -66,9 +66,9 @@ Each app-to-app relationship will explicitly designate which side has authority:
 ## Examples Across Foundation Apps
 
 ### Person↔Family Relationships
-- **Authority**: Family.Members field (Family-side authority)
-- **Non-authority**: Person.Family field (informational only)
-- **Rationale**: Families serve as containers for members; family management workflows more natural
+- **Authority**: Person.Family field (Person-side authority)
+- **Non-authority**: Family.Members field (calculation field showing related people)
+- **Rationale**: Family assignment happens during person creation/updates; individual assignment more natural
 
 ### Person↔School Relationships  
 - **Authority**: Person.School field (Person-side authority)
