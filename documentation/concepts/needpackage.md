@@ -22,14 +22,15 @@ NeedPackage enables clean UI organization without sacrificing individual trackin
 - **Currency** (Single Select): Currency for all amounts in this package (defaults to foundation's default currency)
 - **Request Date** (Date): When this request was submitted
 - **Deadline** (Date): When funding is needed by
-- **Recipients** (Relationship): Links to [Person](person.md)/[School](school.md)/[Group](group.md) records for intended recipients
 - **Context** (Text Area): Background information, special circumstances, or additional details
 - **Notes** (Text Area): Internal operational notes and observations
 - **Relevant Links** (Link): Supporting documentation, photos, or external references
 - **Distribution Type** (Single Select): Group as final recipient, Individual-Equal, Individual-Custom
 - **Priority** (Single Select): Low, Medium, High, Urgent
+- **Needs Spreadsheet** (file): a file structured as a [Needs Spreadsheet](needs_spreadsheet.md). Optional if the user has hand introduced Needs (see next section)
 
 ### Mixed Fields
+- ** Needs ** (Need): the needs associated with this Need package. Can be inputed by the user or generated from the Needs Spreadsheet.
 - **Status** (Calculated Select): Draft, Finalized, Accepted, Declined, Paid, Partially Paid, Cancelled
   - **Automation**: "Paid" when all active child Needs are Paid, "Partially Paid" when some active child Needs are Paid, "Declined" when all active child Needs are Declined
   - **Manual override**: User can change to "Cancelled" for operational exceptions (e.g., recipient group disbanded, circumstances changed)
@@ -42,6 +43,7 @@ NeedPackage enables clean UI organization without sacrificing individual trackin
 - **Need Count** (Calculated Number): Total number of individual [Need](need.md)s in this package
 - **Unique Recipients** (Calculated Number): Total number of distinct recipients across all Needs
 - **Type Summary** (Calculated Text): Breakdown by need type showing number of needs, total amount, and percentage (e.g., "Transport: 25 needs, 125,000 KES (83%); Education: 5 needs, 25,000 KES (17%)")
+- **Recipients** (Relationship): Links to [Person](person.md)/[School](school.md)/[Group](group.md) records for intended recipients, imported automatically from the Needs associated with this NeedPackage 
 
 ### Buttons/Bulk Actions
 - **Finalize Package** (Single Select): "Finalize Now", "None" - Locks Original Total Amount, generates individual Needs, triggers notifications
