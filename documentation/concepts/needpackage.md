@@ -30,7 +30,11 @@ NeedPackage enables clean UI organization without sacrificing individual trackin
 - **Priority** (Single Select): Low, Medium, High, Urgent
 
 ### Mixed Fields
-- **Status** (Calculated Select): Draft, Finalized, Accepted, Declined, Paid, Partially Paid, Cancelled - Auto-calculated based on child Need statuses but can be manually overridden for operational exceptions
+- **Status** (Calculated Select): Draft, Finalized, Accepted, Declined, Paid, Partially Paid, Cancelled
+  - **Automation**: "Paid" when all active child Needs are Paid, "Partially Paid" when some active child Needs are Paid, "Declined" when all active child Needs are Declined
+  - **Manual override**: User can change to "Cancelled" for operational exceptions (e.g., recipient group disbanded, circumstances changed)
+  - **Override scenarios**: Package-level decisions that override individual Need status aggregation
+  - **Finalization lock**: Once "Finalized", most fields become read-only except for manual status overrides
 
 ### Strictly Automated Fields
 - **Original Total Amount** (Calculated Money): Sum of all Need amounts when package was finalized - calculated once and never changes
@@ -44,6 +48,10 @@ NeedPackage enables clean UI organization without sacrificing individual trackin
 - **Mark Needs Status** (Single Select): "Mark all Accepted Needs as Paid", "None" - Triggers bulk status update operations, resets to "None" after execution
 
 ### System Fields
+- **System Messages** (Text Area): Automation log for status calculations, finalization issues, and bulk operation results
+  - Example: "2025-09-06 14:30: Status calculation - 45 of 50 Needs marked Paid, status changed to Partially Paid"
+  - Example: "2025-09-06 15:45: Finalization - Package locked, 50 individual Needs created, notifications sent"
+  - Example: "2025-09-06 16:20: Bulk operation - Mark all Accepted Needs as Paid completed, 48 successful, 2 failed"
 - **Created Date** (Date): When this package was created
 - **Last Updated** (Date): Most recent modification
 

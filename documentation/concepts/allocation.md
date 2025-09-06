@@ -31,7 +31,17 @@ For example:
 - **Receipt Reference** (Text): Link to confirmation documentation
 
 ### Mixed Fields
-- **Status** (Category): Pending | Successful | Failed | Cancelled - Can be auto-calculated based on funding confirmation but manually overridden for operational exceptions
+- **Status** (Category): Pending | Successful | Failed | Cancelled
+  - **Automation**: "Successful" when parent Need status changes to "Paid" and allocation amount contributes to that status
+  - **Manual override**: User can change to "Failed" (recipient unavailable), "Cancelled" (circumstances changed), or "Pending" (awaiting confirmation)
+  - **Override scenarios**: Real-world exceptions where automation doesn't reflect operational reality
+  - **Constraint**: Cannot manually set to "Successful" unless Need is actually paid
+
+### System Fields
+- **System Messages** (Text Area): Automation log for creation method, validation issues, and status updates
+  - Example: "2025-09-06 18:00: Auto-generated - Created via FundingBatch auto-allocation process"
+  - Example: "2025-09-06 18:30: Validation - Amount exceeds available credit, manual review required"
+  - Example: "2025-09-06 19:15: Status change - Marked Successful after Need payment confirmation"
 
 ### Strictly Automated Fields
 - **Creation Method** (Category): "Manual" | "Auto-Generated"

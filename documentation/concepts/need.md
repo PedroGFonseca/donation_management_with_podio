@@ -30,13 +30,21 @@ The [Need](need.md) entity enables both clean UI management (through [NeedPackag
 - **Covered By** ([Person](person.md)/Organization): Specific donor attribution when funding is donor-designated
 
 ### Mixed Fields
-- **Status** (Single Select): New, Accepted, Declined, Allocated, Paid, Failed, Cancelled - Auto-calculated based on allocation status: "Allocated" when allocations exist, "Paid" when sum(successful allocations) >= need amount, but can be manually overridden for operational exceptions
+- **Status** (Single Select): New, Accepted, Declined, Allocated, Paid, Failed, Cancelled
+  - **Automation**: "Allocated" when allocations exist, "Paid" when sum(successful allocations) ≥ Need amount
+  - **Manual override**: User can change to "Declined" (recipient unavailable), "Cancelled" (circumstances changed), or "Failed" (funding unsuccessful)
+  - **Override scenarios**: Real-world exceptions where calculation doesn't reflect operational reality
+  - **Constraint**: Cannot manually set to "Paid" unless allocations actually cover the amount
 
 ### Strictly Automated Fields
 - **Allocated Amount** (Calculated Money): Sum of all successful [Allocation](allocation.md) amounts for this Need
 - **Remaining Amount** (Calculated Money): Amount - Allocated Amount
 
 ### System Fields
+- **System Messages** (Text Area): Automation log for status changes, allocation impacts, and amount change effects
+  - Example: "2025-09-06 16:20: Status change - Allocation sum (15,000) reached Need amount, status changed to Paid"
+  - Example: "2025-09-06 17:10: Amount change - Need amount increased from 10,000 to 15,000, FundingBatch switched to Manual mode"
+  - Example: "2025-09-06 18:30: Manual override - Status changed to Declined due to recipient unavailability"
 - **NeedPackage ID** (Relationship): Links to parent [NeedPackage](needpackage.md)
 - **Template Reference** (Relationship): Links to [NeedTemplate](needtemplate.md) if generated from template
 - **Created Date** (Date): When this Need was created
