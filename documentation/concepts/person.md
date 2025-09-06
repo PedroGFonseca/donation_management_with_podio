@@ -12,7 +12,7 @@ Person records serve as the foundation for recipient identification in the alloc
 ## Key Relationships
 - Parent: None (atomic entity)
 - Children: None (atomic entity)
-- Links to: Need records (as recipients), Allocation records (as recipients), School records (students/staff), Group records (family members), SystemDiffs (historical changes)
+- Links to: [Need](need.md) records (as recipients), [Allocation](allocation.md) records (as recipients), [School](school.md) records (students/staff), [Group](group.md) records (family members), SystemDiffs (historical changes)
 
 ## Fields
 

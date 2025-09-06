@@ -18,7 +18,7 @@ Podio API provides field history tracking through item revisions but has critica
 
 **We will implement a dual-capture historical tracking system that combines Podio API revisions with daily state comparison, stored in dedicated SystemDiffs and MonthlyBackups apps.**
 
-**This approach uses Podio API as one component of a more comprehensive solution documented in "SystemDiffs and MonthlyBackups - Foundation System Design Decision".**
+**This approach uses Podio API as one component of a more comprehensive solution documented in [SystemDiffs and MonthlyBackups - Foundation System Design Decision](diff_storage_decision.md).**
 
 ## Dual-Capture Implementation
 
@@ -29,7 +29,7 @@ The comprehensive solution implements daily capture using both:
 
 ### Current-State App Design
 **All apps focus on current state only**:
-- ~~"Received support in 2024"~~ → Query SystemDiffs/Allocation records
+- ~~"Received support in 2024"~~ → Query SystemDiffs/[Allocation](../concepts/allocation.md) records
 - ~~"Grade/year in Jan 2025"~~ → Use current "Grade/Year" field only
 - ~~Historical status fields~~ → Query SystemDiffs for progression
 
@@ -45,7 +45,7 @@ The comprehensive solution implements daily capture using both:
 changes = query_systemdiffs(app="Person", item_id="123", field="Grade")
 # Result: 2024: Form 2 → 2025: Form 3 → 2026: Form 3
 
-# Support history via Allocation records + SystemDiffs
+# Support history via [Allocation](../concepts/allocation.md) records + SystemDiffs
 support_2024 = query_allocations(recipient="Person123", year=2024)
 ```
 
@@ -70,7 +70,7 @@ state_2025_jan = nearest_monthly_backup("2025-01") + apply_systemdiffs_since()
 - Cross-app change correlation and audit trails
 
 **Financial Integrity**:
-- Support history derived from authoritative Allocation records
+- Support history derived from authoritative [Allocation](../concepts/allocation.md) records
 - Complete audit trail for all financial calculations
 - Attribution tracking for both manual and automated changes
 

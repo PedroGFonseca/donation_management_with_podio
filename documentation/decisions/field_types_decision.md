@@ -17,10 +17,10 @@ Foundation system entities have fields controlled by different actors (users, au
 **System Role**: None (except validation)
 
 **Examples**:
-- **Title** (NeedPackage): User creates descriptive name
-- **Description** (Need): User provides context details  
-- **Priority** (Need): User sets urgency level
-- **Recipients** (NeedPackage): User selects who will benefit
+- **Title** ([NeedPackage](../concepts/needpackage.md)): User creates descriptive name
+- **Description** ([Need](../concepts/need.md)): User provides context details  
+- **Priority** ([Need](../concepts/need.md)): User sets urgency level
+- **Recipients** ([NeedPackage](../concepts/needpackage.md)): User selects who will benefit
 - **Notes** (all entities): User adds operational observations
 
 **Why users control these**: These fields contain business context, strategic decisions, and operational knowledge that only humans possess.
@@ -31,9 +31,9 @@ Foundation system entities have fields controlled by different actors (users, au
 **System Role**: Calculate default value, log when humans override
 
 **Examples**:
-- **Status** (Need): Auto-calculated as "Paid" when allocations sum >= amount, but user can override to "Cancelled" if recipient unavailable
-- **Status** (NeedPackage): Auto-calculated based on child Need statuses, but user can override for operational exceptions
-- **Type Summary** (NeedPackage): Auto-generated breakdown, but user might add manual notes for context
+- **Status** ([Need](../concepts/need.md)): Auto-calculated as "Paid" when allocations sum >= amount, but user can override to "Cancelled" if recipient unavailable
+- **Status** ([NeedPackage](../concepts/needpackage.md)): Auto-calculated based on child [Need](../concepts/need.md) statuses, but user can override for operational exceptions
+- **Type Summary** ([NeedPackage](../concepts/needpackage.md)): Auto-generated breakdown, but user might add manual notes for context
 
 **Why mixed control**: Automation handles the common case efficiently, but real-world exceptions require human judgment (recipient unavailable, changed circumstances, operational complexities).
 
@@ -43,11 +43,11 @@ Foundation system entities have fields controlled by different actors (users, au
 **System Role**: Calculate and enforce correct values, revert manual changes, log override attempts
 
 **Examples**:
-- **Total Amount** (NeedPackage): Must equal sum(child Need amounts)
-- **Allocated Amount** (Need): Must equal sum(successful Allocation amounts)
-- **Available Credit** (FundingBatch): Must equal funded_amount - allocated_amount
-- **Need Count** (NeedPackage): Must equal actual count of child Needs
-- **Unique Recipients** (NeedPackage): Must equal distinct recipient count
+- **Total Amount** ([NeedPackage](../concepts/needpackage.md)): Must equal sum(child [Need](../concepts/need.md) amounts)
+- **Allocated Amount** ([Need](../concepts/need.md)): Must equal sum(successful [Allocation](../concepts/allocation.md) amounts)
+- **Available Credit** ([FundingBatch](../concepts/fundingbatch.md)): Must equal funded_amount - allocated_amount
+- **Need Count** ([NeedPackage](../concepts/needpackage.md)): Must equal actual count of child [Need](../concepts/need.md)s
+- **Unique Recipients** ([NeedPackage](../concepts/needpackage.md)): Must equal distinct recipient count
 
 **Why strictly automated**: These fields ensure financial consistency and audit integrity. Manual changes would:
 - Break accounting accuracy
@@ -110,7 +110,7 @@ Logging all override attempts provides complete visibility into when and why aut
 ## Examples in Practice
 
 ### Scenario 1: Student Becomes Unavailable
-- **Need Status**: Auto-calculated as "Paid" based on successful allocation
+- **[Need](../concepts/need.md) Status**: Auto-calculated as "Paid" based on successful allocation
 - **Real situation**: Student fell sick, couldn't attend funded event
 - **User action**: Override status to "Cancelled" 
 - **System response**: Accept "Cancelled" as new status, Podio logs the field change automatically
@@ -120,7 +120,7 @@ Logging all override attempts provides complete visibility into when and why aut
 - **User concern**: Thinks amount should be 160,000 KES
 - **User action**: Attempts to manually change Total Amount
 - **System response**: Immediately revert to 150,000 KES, log the attempt, alert administrators
-- **Correct action**: User should check/correct individual Need amounts, Total Amount will recalculate automatically
+- **Correct action**: User should check/correct individual [Need](../concepts/need.md) amounts, Total Amount will recalculate automatically
 
 ### Scenario 3: Operational Context Addition
 - **Description field**: User adds details about recipient situation

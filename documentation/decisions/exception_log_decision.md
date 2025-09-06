@@ -39,14 +39,14 @@ YYYY-MM-DD HH:MM: [Context] - [Issue Description] - [Action Taken]
 ### Implementation Across Apps
 
 #### **Apps Requiring Exception Log**
-- **FundingBatch**: Auto-allocation exceptions, credit violations
-- **NeedPackage**: Status calculation issues, template generation problems  
-- **Need**: Amount changes affecting allocations, status inheritance failures
-- **Allocation**: Credit limit violations, duplicate allocation attempts
-- **Transaction**: Banking status conflicts, amount mismatches
+- **[FundingBatch](../concepts/fundingbatch.md)**: Auto-allocation exceptions, credit violations
+- **[NeedPackage](../concepts/needpackage.md)**: Status calculation issues, template generation problems  
+- **[Need](../concepts/need.md)**: Amount changes affecting allocations, status inheritance failures
+- **[Allocation](../concepts/allocation.md)**: Credit limit violations, duplicate allocation attempts
+- **[Transaction](../concepts/transaction.md)**: Banking status conflicts, amount mismatches
 
 #### **Apps Not Requiring Exception Log**
-- **People/Schools/Groups**: Static reference data, minimal automation
+- **[Person](../concepts/person.md)s/[School](../concepts/school.md)s/[Group](../concepts/group.md)s**: Static reference data, minimal automation
 - **NeedTemplate**: Template definitions, no real-time automation
 
 ### Automation Logging Rules

@@ -45,7 +45,7 @@ Capture individual field changes with attribution when available, ensuring no ch
 
 ### Structure
 ```
-- App (Text): Source app name ("Person", "School", "Need", etc.)
+- App (Text): Source app name ("[Person](../concepts/person.md)", "[School](../concepts/school.md)", "[Need](../concepts/need.md)", etc.)
 - Item ID (Text): Specific record that changed
 - Field Name (Text): Which field changed
 - Change Date (Date): When change occurred  
@@ -54,7 +54,7 @@ Capture individual field changes with attribution when available, ensuring no ch
 - Changed By (Person): Human who made direct change (null for automation)
 - Triggered By (Person): Human who triggered automation (null for scheduled automation)
 - Change Type (Select): "Manual", "User-Triggered Automation", "Scheduled Automation", "Webhook Automation"
-- Automation Context (Text): What triggered the automation (e.g., "Allocation created", "Daily status recalculation", "Bulk action: Mark all Accepted Needs as Paid")
+- Automation Context (Text): What triggered the automation (e.g., "[Allocation](../concepts/allocation.md) created", "Daily status recalculation", "Bulk action: Mark all Accepted [Need](../concepts/need.md)s as Paid")
 - Source (Select): "Podio Revision", "Daily State Comparison"
 - Attribution Available (Checkbox): Whether complete attribution chain is known
 ```
@@ -76,7 +76,7 @@ Capture individual field changes with attribution when available, ensuring no ch
 - Changed By: null  
 - Triggered By: User who triggered it
 - Change Type: "User-Triggered Automation"
-- Automation Context: Derived from System Messages (e.g., "Allocation created for Need N123", "Bulk action: Mark all Accepted Needs as Paid")
+- Automation Context: Derived from System Messages (e.g., "[Allocation](../concepts/allocation.md) created for [Need](../concepts/need.md) N123", "Bulk action: Mark all Accepted [Need](../concepts/need.md)s as Paid")
 
 **Scheduled Automation:**
 - Changed By: null
@@ -88,7 +88,7 @@ Capture individual field changes with attribution when available, ensuring no ch
 - Changed By: null
 - Triggered By: User who made the triggering change (when determinable)
 - Change Type: "Webhook Automation"
-- Automation Context: "Status inheritance from Need N123 payment", "FundingBatch credit recalculation", etc.
+- Automation Context: "Status inheritance from [Need](../concepts/need.md) N123 payment", "[FundingBatch](../concepts/fundingbatch.md) credit recalculation", etc.
 
 ## MonthlyBackups App Design
 

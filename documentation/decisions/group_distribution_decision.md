@@ -4,29 +4,29 @@
 
 ## Problem Statement
 
-Groups serve two fundamentally different purposes in donation tracking: (1) final recipients that receive funds as a collective entity, and (2) convenience tools for creating individual recipient records. The system needs to handle both patterns while avoiding complex forwarding logic and membership change complications.
+[Group](../concepts/group.md)s serve two fundamentally different purposes in donation tracking: (1) final recipients that receive funds as a collective entity, and (2) convenience tools for creating individual recipient records. The system needs to handle both patterns while avoiding complex forwarding logic and membership change complications.
 
 ## Current Challenge Example
 
-**Scenario**: NeedPackage created for "Class B Girls" transport needs
-1. User selects group "Class B Girls" (10 members) for equal distribution
-2. System creates 10 individual Needs (1,000 KES each)
-3. Two months later: Alice transfers to different school, leaves "Class B Girls" group
-4. **Problem**: Alice's Need still references a group she no longer belongs to
+**Scenario**: [NeedPackage](../concepts/needpackage.md) created for "Class B Girls" transport needs
+1. User selects [Group](../concepts/group.md) "Class B Girls" (10 members) for equal distribution
+2. System creates 10 individual [Need](../concepts/need.md)s (1,000 KES each)
+3. Two months later: Alice transfers to different school, leaves "Class B Girls" [Group](../concepts/group.md)
+4. **Problem**: Alice's [Need](../concepts/need.md) still references a [Group](../concepts/group.md) she no longer belongs to
 
 ## Decision: Group Property + Membership Snapshot
 
 ### Core Design Principles
 
-#### **1. Groups Have Distribution Property**
-Each Group has a "Final Receiver" property:
+#### **1. [Group](../concepts/group.md)s Have Distribution Property**
+Each [Group](../concepts/group.md) has a "Final Receiver" property:
 - **True**: Group always receives as collective entity (families, organizations)
 - **False**: Group used for individual distribution only (student classes, member lists)
 
 #### **2. Snapshot Membership for Individual Distribution**
-When Group with "Final Receiver = False" used for equal distribution:
-- System captures group membership at moment of NeedPackage creation
-- Creates individual Need records for each member at that snapshot
+When [Group](../concepts/group.md) with "Final Receiver = False" used for equal distribution:
+- System captures [Group](../concepts/group.md) membership at moment of [NeedPackage](../concepts/needpackage.md) creation
+- Creates individual [Need](../concepts/need.md) records for each member at that snapshot
 - Group membership can change independently afterward
 - No ongoing relationship between Needs and Group
 

@@ -66,7 +66,7 @@ Each app-to-app relationship will explicitly designate which side has authority:
 ## Examples Across Foundation Apps
 
 ### Person↔Family Relationships
-- **Authority**: [Person](person.md).Family field ([Person](person.md)-side authority)
+- **Authority**: [Person](../concepts/person.md).Family field ([Person](../concepts/person.md)-side authority)
 - **Non-authority**: Family.Members field (calculation field showing related people)
 - **Rationale**: Family assignment happens during person creation/updates; individual assignment more natural
 

@@ -10,8 +10,8 @@ Podio's relationship fields create unidirectional links where linking A to B doe
 
 ### **How Podio Relationships Work**
 ```
-Allocation → Need (explicit field in Allocation record)
-Need ← Allocation (no automatic reverse link in Need record)
+[Allocation](../concepts/allocation.md) → [Need](../concepts/need.md) (explicit field in [Allocation](../concepts/allocation.md) record)
+[Need](../concepts/need.md) ← [Allocation](../concepts/allocation.md) (no automatic reverse link in [Need](../concepts/need.md) record)
 ```
 
 ### **User Interface Implications**
@@ -39,27 +39,27 @@ Rather than fighting Podio's limitations with complex workarounds, design link d
 
 #### **Point Toward User Modification Targets**
 Direct relationships toward records users modify most frequently:
-- **Allocation → Need**: Users frequently reassign which Need gets funding
-- **Allocation → FundingBatch**: Users occasionally change funding source
-- **Need → NeedPackage**: Needs rarely change packages after creation
-- **Transaction → FundingBatch**: Transactions rarely change target batch
+- **[Allocation](../concepts/allocation.md) → [Need](../concepts/need.md)**: Users frequently reassign which [Need](../concepts/need.md) gets funding
+- **[Allocation](../concepts/allocation.md) → [FundingBatch](../concepts/fundingbatch.md)**: Users occasionally change funding source
+- **[Need](../concepts/need.md) → [NeedPackage](../concepts/needpackage.md)**: [Need](../concepts/need.md)s rarely change packages after creation
+- **[Transaction](../concepts/transaction.md) → [FundingBatch](../concepts/fundingbatch.md)**: [Transaction](../concepts/transaction.md)s rarely change target batch
 
 #### **Optimize for Common Workflows**
-**Scenario 1**: "What's funding this Need?"
-- User starts at Need record
-- Views "Related Items" to see Allocations
+**Scenario 1**: "What's funding this [Need](../concepts/need.md)?"
+- User starts at [Need](../concepts/need.md) record
+- Views "Related Items" to see [Allocation](../concepts/allocation.md)s
 - Navigation: Natural and efficient
 
-**Scenario 2**: "Mark all Allocations for this FundingBatch as successful"  
-- User starts at FundingBatch record
-- Views "Related Items" to see Allocations
+**Scenario 2**: "Mark all [Allocation](../concepts/allocation.md)s for this [FundingBatch](../concepts/fundingbatch.md) as successful"  
+- User starts at [FundingBatch](../concepts/fundingbatch.md) record
+- Views "Related Items" to see [Allocation](../concepts/allocation.md)s
 - Clicks through to modify each Allocation status
 - Navigation: Acceptable, given platform constraints
 
-**Scenario 3**: "Which Needs are funded by this batch?"
-- User starts at FundingBatch record
-- Views "Related Items" to see Allocations
-- Clicks through to see individual Needs
+**Scenario 3**: "Which [Need](../concepts/need.md)s are funded by this batch?"
+- User starts at [FundingBatch](../concepts/fundingbatch.md) record
+- Views "Related Items" to see [Allocation](../concepts/allocation.md)s
+- Clicks through to see individual [Need](../concepts/need.md)s
 - Navigation: Additional clicks required but manageable
 
 ### **Accepted Limitations and Mitigations**

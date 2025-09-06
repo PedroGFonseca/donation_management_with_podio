@@ -4,7 +4,7 @@
 
 ## Problem Statement
 
-When FundingBatch auto-allocation creates exceptions (Need amounts change, Needs marked obsolete, etc.), users need a way to trigger fresh allocation calculations without losing existing work. The system must provide a clear mechanism for users to recalculate allocations while working within Podio's UI constraints.
+When [FundingBatch](../concepts/fundingbatch.md) auto-allocation creates exceptions ([Need](../concepts/need.md) amounts change, [Need](../concepts/need.md)s marked obsolete, etc.), users need a way to trigger fresh allocation calculations without losing existing work. The system must provide a clear mechanism for users to recalculate allocations while working within Podio's UI constraints.
 
 ## Podio UI Constraints
 

@@ -4,17 +4,17 @@
 
 ## Problem Statement
 
-When a FundingBatch is created for a NeedPackage containing many individual Needs (e.g., 50 students requiring transport with varying amounts), the current system would require users to manually create 50 separate Allocation records. This defeats the operational efficiency gained from spreadsheet-based Need creation.
+When a [FundingBatch](../concepts/fundingbatch.md) is created for a [NeedPackage](../concepts/needpackage.md) containing many individual [Need](../concepts/need.md)s (e.g., 50 students requiring transport with varying amounts), the current system would require users to manually create 50 separate [Allocation](../concepts/allocation.md) records. This defeats the operational efficiency gained from spreadsheet-based [Need](../concepts/need.md) creation.
 
 ## Motivation Example
 
 **Scenario**: Medium-distance student transport
 1. User creates spreadsheet with 50 students, each with different transport costs ranging from 8,000-12,000 KES, totaling 500,000 KES
 2. Automation reads spreadsheet and creates:
-   - NeedPackage "MediumDistanceTransportMarch2025" 
-   - 50 individual Need records with specific amounts for each student
-3. User creates FundingBatch "RegularOperationsMarch2025" (500,000 KES) and links it to the transport NeedPackage
-4. **Current problem**: User must now manually create 50 Allocation records linking the FundingBatch to each individual Need
+   - [NeedPackage](../concepts/needpackage.md) "MediumDistanceTransportMarch2025" 
+   - 50 individual [Need](../concepts/need.md) records with specific amounts for each student
+3. User creates [FundingBatch](../concepts/fundingbatch.md) "RegularOperationsMarch2025" (500,000 KES) and links it to the transport [NeedPackage](../concepts/needpackage.md)
+4. **Current problem**: User must now manually create 50 [Allocation](../concepts/allocation.md) records linking the [FundingBatch](../concepts/fundingbatch.md) to each individual [Need](../concepts/need.md)
 
 **Without auto-allocation**: User performs 50+ manual operations, negating spreadsheet efficiency
 **With auto-allocation**: System automatically creates all 50 Allocations, user reviews and confirms
@@ -22,8 +22,8 @@ When a FundingBatch is created for a NeedPackage containing many individual Need
 ## Decision: Auto-Allocation with Manual Override
 
 ### Core Logic
-**When**: FundingBatch is linked to NeedPackage(s) AND total amounts match
-**Action**: Automation automatically creates Allocation records for all linked Needs
+**When**: [FundingBatch](../concepts/fundingbatch.md) is linked to [NeedPackage](../concepts/needpackage.md)(s) AND total amounts match
+**Action**: Automation automatically creates [Allocation](../concepts/allocation.md) records for all linked [Need](../concepts/need.md)s
 **Safeguard**: Switch to manual mode when exceptions occur
 
 ### Detailed Workflow

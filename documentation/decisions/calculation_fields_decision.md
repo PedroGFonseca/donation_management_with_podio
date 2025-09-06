@@ -39,15 +39,15 @@ Calculation fields output one of three types determined at creation:
 - Calculation field is read-only by design
 - Shows current state of relationships from authority side
 
-### Example: Person↔Family Relationships
+### Example: [Person](../concepts/person.md)↔Family Relationships
 ```
-Authority Side (Person app):
+Authority Side ([Person](../concepts/person.md) app):
 - Family field: Editable relationship to Groups app
 
 Non-Authority Side (Family app):
 - Remove: Members relationship field  
 - Add: Members calculation field
-- Formula: @All of Name (where Name comes from People with Family = this Family)
+- Formula: @All of Name (where Name comes from [Person](../concepts/person.md)s with Family = this Family)
 - Output: "Mary Thomas, John Thomas, Sarah Thomas"
 ```
 

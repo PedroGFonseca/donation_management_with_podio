@@ -12,7 +12,7 @@ Foundation Podio apps have accumulated time-bound historical fields (e.g., "Rece
 
 ## Rationale
 
-This decision is based on comprehensive analysis documented in the "SystemDiffs and MonthlyBackups - Foundation System Design Decision" which established that reliable historical tracking requires dedicated infrastructure independent of Podio's limitations.
+This decision is based on comprehensive analysis documented in the [SystemDiffs and MonthlyBackups - Foundation System Design Decision](diff_storage_decision.md) which established that reliable historical tracking requires dedicated infrastructure independent of Podio's limitations.
 
 ### Primary Technical Justification
 
@@ -31,8 +31,8 @@ This decision is based on comprehensive analysis documented in the "SystemDiffs 
 ## Fields to Remove from Apps
 
 ### Person App Time-Bound Fields
-- ~~"Received support in 2024"~~ → Query SystemDiffs/Allocation records
-- ~~"Has received support in 2025"~~ → Query SystemDiffs/Allocation records
+- ~~"Received support in 2024"~~ → Query SystemDiffs/[Allocation](../concepts/allocation.md) records
+- ~~"Has received support in 2025"~~ → Query SystemDiffs/[Allocation](../concepts/allocation.md) records
 - ~~"Grade/year in Jan 2025"~~ → Use current "Grade/Year" field only
 
 ### General Pattern for All Apps
@@ -78,7 +78,7 @@ Remove any field with year/date specificity that represents historical snapshots
 - Time-bound status or priority fields
 
 **Historical Queries Available Through SystemDiffs**:
-- Support received by year → Query Allocation records + SystemDiffs
+- Support received by year → Query [Allocation](../concepts/allocation.md) records + SystemDiffs
 - Grade progression → SystemDiffs field changes over time
 - Status change history → SystemDiffs status field changes
 
@@ -91,7 +91,7 @@ Remove any field with year/date specificity that represents historical snapshots
 - Historical relationship status fields
 - Year-specific operational notes
 
-### Need/NeedPackage Apps
+### [Need](../concepts/need.md)/[NeedPackage](../concepts/needpackage.md) Apps
 **Keep (Current State)**:
 - Current status (New, Allocated, Paid, etc.)
 - Current amounts and recipients
@@ -107,9 +107,9 @@ Remove any field with year/date specificity that represents historical snapshots
 **Recent History (1-2 years)**: Direct SystemDiffs queries for day-to-day operational needs
 
 **Example Queries**:
-- "Show all grade changes for Person X in last year"
-- "Who changed Need Y status last month?"
-- "What support did Person Z receive this year?"
+- "Show all grade changes for [Person](../concepts/person.md) X in last year"
+- "Who changed [Need](../concepts/need.md) Y status last month?"
+- "What support did [Person](../concepts/person.md) Z receive this year?"
 
 ### For Audit and Compliance
 **Long-term History (7+ years)**: Combination of MonthlyBackups (baselines) + SystemDiffs (changes)
@@ -124,8 +124,8 @@ Remove any field with year/date specificity that represents historical snapshots
 
 **Example Analysis**:
 - "Show all system changes on Day X" (investigate issues)
-- "Track Person Y across all apps over time" (comprehensive history)
-- "Correlate Need status changes with Allocation creation" (workflow analysis)
+- "Track [Person](../concepts/person.md) Y across all apps over time" (comprehensive history)
+- "Correlate [Need](../concepts/need.md) status changes with [Allocation](../concepts/allocation.md) creation" (workflow analysis)
 
 ## Migration Strategy
 

@@ -1,18 +1,18 @@
 # NeedPackage
 
 ## What It Is
-A group-level funding request that contains multiple individual Need records, providing clean UI management while maintaining detailed individual accountability.
+A group-level funding request that contains multiple individual [Need](need.md) records, providing clean UI management while maintaining detailed individual accountability.
 
 ## Purpose
-To organize related funding requests into manageable units that can mix multiple recipients and multiple need types, while automatically generating precise individual Need records for perfect accountability.
+To organize related funding requests into manageable units that can mix multiple recipients and multiple need types, while automatically generating precise individual [Need](need.md) records for perfect accountability.
 
 ## Why it is needed 
 NeedPackage enables clean UI organization without sacrificing individual tracking. It allows natural bundling of requests (like "School F new semester needs") while ensuring every recipient and amount is precisely tracked through individual Need records.
 
 ## Key Relationships
 - Parent: None (top-level request entity)
-- Children: Individual Need records (one per recipient per need type)
-- Links to: Person/School/Group records (recipients)
+- Children: Individual [Need](need.md) records (one per recipient per need type)
+- Links to: [Person](person.md)/[School](school.md)/[Group](group.md) records (recipients)
 
 ## Fields
 
@@ -22,7 +22,7 @@ NeedPackage enables clean UI organization without sacrificing individual trackin
 - **Currency** (Single Select): Currency for all amounts in this package (defaults to foundation's default currency)
 - **Request Date** (Date): When this request was submitted
 - **Deadline** (Date): When funding is needed by
-- **Recipients** (Relationship): Links to Person/School/Group records for intended recipients
+- **Recipients** (Relationship): Links to [Person](person.md)/[School](school.md)/[Group](group.md) records for intended recipients
 - **Context** (Text Area): Background information, special circumstances, or additional details
 - **Notes** (Text Area): Internal operational notes and observations
 - **Relevant Links** (Link): Supporting documentation, photos, or external references
@@ -37,9 +37,9 @@ NeedPackage enables clean UI organization without sacrificing individual trackin
   - **Finalization lock**: Once "Finalized", most fields become read-only except for manual status overrides
 
 ### Strictly Automated Fields
-- **Original Total Amount** (Calculated Money): Sum of all Need amounts when package was finalized - calculated once and never changes
-- **Current Total Amount** (Calculated Money): Sum of all active Need amounts (excludes cancelled/obsolete Needs)
-- **Need Count** (Calculated Number): Total number of individual Needs in this package
+- **Original Total Amount** (Calculated Money): Sum of all [Need](need.md) amounts when package was finalized - calculated once and never changes
+- **Current Total Amount** (Calculated Money): Sum of all active [Need](need.md) amounts (excludes cancelled/obsolete Needs)
+- **Need Count** (Calculated Number): Total number of individual [Need](need.md)s in this package
 - **Unique Recipients** (Calculated Number): Total number of distinct recipients across all Needs
 - **Type Summary** (Calculated Text): Breakdown by need type showing number of needs, total amount, and percentage (e.g., "Transport: 25 needs, 125,000 KES (83%); Education: 5 needs, 25,000 KES (17%)")
 
