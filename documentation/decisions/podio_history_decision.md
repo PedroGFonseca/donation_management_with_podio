@@ -1,132 +1,102 @@
-# Podio API Field History - Foundation System Design Decision
+# Historical Tracking Strategy - Foundation System Design Decision
 
 *Decision Document - September 2025*
 
 ## Problem Statement
 
-Foundation system entities contain both current state information (Jon is currently in 3rd grade at School B) and historical tracking needs (Jon was in 2nd grade at School A in 2024, moved to 3rd grade same school in 2025, then transferred to School B while repeating 3rd grade in 2026). The question is whether to store historical data explicitly in separate fields/apps or leverage Podio's built-in revision tracking capabilities.
+Foundation system entities contain both current state information (Jon is currently in 3rd grade at School B) and historical tracking needs (Jon was in 2nd grade at School A in 2024, moved to 3rd grade same school in 2025, then transferred to School B while repeating 3rd grade in 2026). The question is whether to store historical data explicitly in separate fields/apps or implement a comprehensive historical tracking system.
 
 ## Technical Discovery
 
-Podio API provides comprehensive field history tracking through item revisions:
-- **Get Item Revisions**: `/item/{item_id}/revision` - Returns all revisions with timestamps and users
-- **Get Revision Differences**: `/item/{item_id}/revision/{from}/{to}` - Shows exactly which fields changed between specific revisions
-- **Field-level tracking**: Can see old value → new value for any field change
-- **Complete audit trail**: Who changed what when, with full context
+Podio API provides field history tracking through item revisions but has critical limitations:
+- **Get Item Revisions**: `/item/{item_id}/revision` - Returns revisions with timestamps and users
+- **Get Revision Differences**: `/item/{item_id}/revision/{from}/{to}` - Shows field changes between revisions
+- **30-revision API limit**: Only returns most recent 30 revisions, older changes permanently lost
+- **No guaranteed retention**: Data may be lost if Podio account terminated
 
-## Decision: Use Podio API Field History
+## Decision: Comprehensive SystemDiffs + MonthlyBackups Strategy
 
-**We will rely on Podio's built-in revision system for historical tracking rather than creating explicit historical storage fields or apps.**
+**We will implement a dual-capture historical tracking system that combines Podio API revisions with daily state comparison, stored in dedicated SystemDiffs and MonthlyBackups apps.**
 
-## Implications for System Design
+**This approach uses Podio API as one component of a more comprehensive solution documented in "SystemDiffs and MonthlyBackups - Foundation System Design Decision".**
 
-### Person App Simplification
-**Remove all time-bound fields**:
-- ~~"Received support in 2024"~~ → Query Allocation records
-- ~~"Has received support in 2025"~~ → Query Allocation records  
+## Dual-Capture Implementation
+
+### SystemDiffs Component
+The comprehensive solution implements daily capture using both:
+1. **Podio API revisions**: For detailed attribution and granular changes
+2. **State comparison**: For 100% change detection as safety net
+
+### Current-State App Design
+**All apps focus on current state only**:
+- ~~"Received support in 2024"~~ → Query SystemDiffs/Allocation records
 - ~~"Grade/year in Jan 2025"~~ → Use current "Grade/Year" field only
+- ~~Historical status fields~~ → Query SystemDiffs for progression
 
-**Focus on current state**:
-- Current grade/year
-- Current school
-- Current status (in touch/lost touch)
-- Current priority
+**Focus on operational efficiency**:
+- Current grade/year, school, status, priority
 - Demographics (name, DOB, gender, etc.)
+- Current contact information and relationships
 
-### Historical Queries Available Through API
-**Grade progression tracking**:
-```
-2024: revision shows "Grade: Form 2, School: School A"
-2025: revision shows "Grade: Form 3, School: School A" 
-2026: revision shows "Grade: Form 3, School: School B"
-```
+### Historical Access Pattern
+**Operational Queries** (recent history):
+```python
+# Grade progression via SystemDiffs
+changes = query_systemdiffs(app="Person", item_id="123", field="Grade")
+# Result: 2024: Form 2 → 2025: Form 3 → 2026: Form 3
 
-**Status change tracking**:
-```
-2024: revision shows "Status: In touch, Priority: High"
-2025: revision shows "Status: Lost touch, Priority: Low"
-2026: revision shows "Status: In touch, Priority: Medium"
+# Support history via Allocation records + SystemDiffs
+support_2024 = query_allocations(recipient="Person123", year=2024)
 ```
 
-**Support history tracking**:
-- Primary source: Allocation records (financial accuracy)
-- Secondary verification: Person field changes if needed
+**Audit Reconstruction** (long-term history):
+```python
+# Combine MonthlyBackups baseline + SystemDiffs changes
+state_2025_jan = nearest_monthly_backup("2025-01") + apply_systemdiffs_since()
+```
 
-### Benefits of This Approach
+### Benefits of Integrated Approach
 
-**Data Model Cleanliness**:
-- Person app contains only current, relevant information
-- No duplicate storage of historical data
-- No artificial time-bound field proliferation
-- No need for PersonYear or similar tracking apps
+**Complete Coverage**:
+- Podio API provides attribution and detailed change context
+- State comparison ensures no changes ever lost (even if >30 revisions)
+- MonthlyBackups provide baseline snapshots for reconstruction
+- 7-year ANBI compliance guaranteed
 
-**Audit Compliance**:
-- Complete field change history maintained automatically
-- User attribution for every change
-- Timestamp accuracy for all modifications
-- No manual historical record maintenance required
+**Operational Reliability**:
+- Apps remain clean and current-state focused
+- Historical queries available through SystemDiffs infrastructure
+- No dependency on Podio revision limits or retention policies
+- Cross-app change correlation and audit trails
 
-**Operational Efficiency**:
-- Single source of truth for current person data
-- Historical queries available when needed via API
-- No need to manually update year-specific fields
-- Reduced data entry burden
-
-**Financial Accuracy**:
+**Financial Integrity**:
 - Support history derived from authoritative Allocation records
-- Person app doesn't become source of truth for financial data
-- Cross-validation possible between person changes and allocation timing
+- Complete audit trail for all financial calculations
+- Attribution tracking for both manual and automated changes
 
-### Implementation Requirements
+## Implementation Integration
 
-**API Integration**:
-- Build Python functions to query revision history when needed
-- Create utilities to show field progression over time
-- Implement caching for frequently-accessed historical data
+**Daily Process**:
+1. Read Podio API revisions (detailed attribution)
+2. Perform state comparison (complete coverage)
+3. Store both in SystemDiffs with full context
+4. Parse System Messages for automation attribution
 
-**Reporting Capabilities**:
-- "Show Jon's school progression" → API revision query
-- "Who changed status from In Touch to Lost Touch?" → Revision difference API
-- "Support received by year" → Allocation query with person filter
+**Query Capabilities**:
+- Recent changes: Direct SystemDiffs queries
+- Historical reconstruction: MonthlyBackups + SystemDiffs
+- Attribution analysis: Podio revision data in SystemDiffs
+- Cross-app correlation: Unified SystemDiffs across all apps
 
-**UI Considerations**:
-- Current person data shows in main view
-- Historical progression available via "Show History" feature
-- Integration between person changes and allocation timeline
+## Success Criteria
 
-### Edge Cases and Limitations
-
-**API Rate Limits**:
-- Revision queries count against Podio API limits
-- May need caching for frequently-accessed historical data
-- Bulk historical analysis may require careful rate limit management
-
-**Data Retention**:
-- Podio retains revision history - verify retention policies align with ANBI requirements
-- No control over Podio's revision retention period
-- May need periodic export for long-term archival
-
-**Query Complexity**:
-- Simple current state queries remain fast
-- Historical progression queries require API calls
-- Complex historical analysis may be slower than dedicated historical tables
-
-## Alternative Approaches Rejected
-
-**PersonYear App**: Would duplicate data available through revisions while adding complexity
-
-**Historical Fields**: Would clutter Person app with time-bound data that becomes obsolete
-
-**Separate Historical Apps**: Would create data synchronization challenges and potential inconsistencies
-
-## Validation Criteria
-
-This approach succeeds if:
-- Person app becomes cleaner and more focused
-- Historical tracking needs are met through API queries
-- API performance is acceptable for operational needs
-- Audit and compliance requirements are satisfied through revision history
-- Development complexity is reduced compared to custom historical storage
+This integrated approach succeeds if:
+- Apps become cleaner and more current-state focused
+- 100% change detection achieved across all apps
+- Complete attribution preserved where available
+- ANBI 7-year retention satisfied with full audit capability
+- Historical reconstruction possible for any date
+- Performance acceptable for operational needs
 
 ---
 
