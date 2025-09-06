@@ -1,0 +1,1 @@
+we keep referring to parent child relationships in the concepts, but that doesn't actually exist in Podio. Do we need to change this? Maybe links from and links to? Or are these the same thing? 
