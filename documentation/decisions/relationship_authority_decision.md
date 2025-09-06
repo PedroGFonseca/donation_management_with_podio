@@ -4,7 +4,7 @@
 
 ## Problem Statement
 
-Podio apps frequently contain bidirectional relationships where the same logical connection can be expressed from either side. For example, Person↔Family relationships can be managed through either the "Family" field on Person records or the "Members" field on Family records. This creates data integrity risks and user confusion when both sides can be independently modified.
+Podio apps frequently contain bidirectional relationships where the same logical connection can be expressed from either side. For example, [Person](../concepts/person.md)↔Family relationships can be managed through either the "Family" field on [Person](../concepts/person.md) records or the "Members" field on Family records. This creates data integrity risks and user confusion when both sides can be independently modified.
 
 ## The Bidirectional Relationship Problem
 
@@ -47,7 +47,7 @@ Each app-to-app relationship will explicitly designate which side has authority:
 
 ### Consistency Enforcement
 - Non-authoritative fields will be removed from apps entirely (since Podio lacks read-only field functionality)
-- Replaced with calculation fields that display relationship information in read-only format (see "Calculation Fields for Bidirectional Relationship Display" decision document)
+- Replaced with calculation fields that display relationship information in read-only format (see [Calculation Fields for Bidirectional Relationship Display](calculation_fields_decision.md) decision document)
 - User interfaces and training must clearly direct users to the authoritative side for relationship management
 - Relationship queries should use only the authoritative field
 
@@ -55,18 +55,18 @@ Each app-to-app relationship will explicitly designate which side has authority:
 
 **Container Relationships**: When one entity serves as a container for others
 - Pattern: Authority typically resides with the container
-- Examples: School contains Students/Staff, Family contains Members
+- Examples: [School](../concepts/school.md) contains Students/Staff, Family contains Members
 - Rationale: Container management is more natural from the container perspective
 
 **Attribution Relationships**: When one entity belongs to or is assigned to another  
 - Pattern: Authority typically resides with the item being categorized
-- Examples: Need belongs to Recipient, Transaction belongs to FundingBatch
+- Examples: [Need](../concepts/need.md) belongs to Recipient, [Transaction](../concepts/transaction.md) belongs to [FundingBatch](../concepts/fundingbatch.md)
 - Rationale: Assignment is more natural when creating the item being assigned
 
 ## Examples Across Foundation Apps
 
 ### Person↔Family Relationships
-- **Authority**: Person.Family field (Person-side authority)
+- **Authority**: [Person](person.md).Family field ([Person](person.md)-side authority)
 - **Non-authority**: Family.Members field (calculation field showing related people)
 - **Rationale**: Family assignment happens during person creation/updates; individual assignment more natural
 
