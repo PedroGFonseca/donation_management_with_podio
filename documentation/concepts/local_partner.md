@@ -1,39 +1,44 @@
-# Local partner
+# [Concept Name]
 
 ## What It Is
-Describes an organization/person who is providing the foundation with services on the ground 
+[One sentence definition]
 
 ## Purpose
-Certain partners are necessary for performing tasks the foundation cannot do on the ground, such as 
-- Distributing funds 
-- Vetting schools 
-- Checking in on scholars 
-- Transporting goods 
+[Why this concept exists in the system]
 
 ## Why it is needed 
 
 ## Key Relationships
-- **References**: [To be defined based on actual Podio app fields]
-- **Referenced by**: [To be defined based on other apps that reference this entity]
+- **References**: [Entities this app has relationship fields for]
+- **Referenced by**: [Apps that have relationship fields pointing to this entity]
+- **Implements**: [Many-to-many relationships this entity enables] (junction entities only)
 
 ## Fields
-<!-- Use - **Name** (Type): descrition-->
+<!-- Use - **Name** (Type): description-->
 <!-- For instance - **Amount** (Money): Amount needed for this recipient -->
 
-Type: 
-- Strategic partner 
-- Local NGO 
-- Paid contractor 
+<!-- IMPORTANT: All concepts with automation MUST include System Messages field -->
+<!-- IMPORTANT: All status fields MUST specify automation rules and override scenarios -->
+<!-- IMPORTANT: Use [Concept](concept.md) format for cross-references within concepts/ directory -->
 
-### Core Fields
+### User Input Fields
 
-### Administrative Fields  
+### Mixed Fields
+- **Status** (Single Select): [Status options]
+  - **Automation**: [When automation applies and what it does]
+  - **Manual override**: [When manual override is allowed and what it can change to]
+  - **Override scenarios**: [Specific cases where manual override is appropriate]
+  - **Constraint**: [Any business rules that prevent invalid status combinations]
 
+### Strictly Automated Fields
 
-### Optional Fields
-
+### Buttons/Bulk Actions
 
 ### System Fields
+- **System Messages** (Text Area): Automation log for [specific automation events for this concept]
+  - Example: "[Date]: [Event description] - [Specific action taken]"
+  - Example: "[Date]: [Event description] - [Specific action taken]"
+  - Example: "[Date]: [Event description] - [Specific action taken]"
 
 
 ## Rules
