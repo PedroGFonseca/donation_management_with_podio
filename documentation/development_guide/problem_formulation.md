@@ -1,5 +1,9 @@
 # Foundation Donation Tracking System - Problem Formulation
 
+> **⚠️ ARCHIVED DOCUMENT**  
+> This document has been superseded by the [Foundation System Overview](foundation_system_overview.md) which reflects the current implemented architecture and design decisions.  
+> This document is preserved for historical context of the original problem analysis.
+
 ## Current Situation
 
 The foundation has 3 employees and tracks hundreds of donations per year using Podio. The current system uses separate apps for Needs, Transactions, People, Schools, and Groups, but is experiencing significant limitations.
