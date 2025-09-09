@@ -9,9 +9,9 @@
 ## Why it is needed 
 
 ## Key Relationships
-- Parent: [What contains this]
-- Children: [What this contains]
-- Links to: [What this connects to]
+- **References**: [Entities this app has relationship fields for]
+- **Referenced by**: [Apps that have relationship fields pointing to this entity]
+- **Implements**: [Many-to-many relationships this entity enables] (junction entities only)
 
 ## Fields
 <!-- Use - **Name** (Type): description-->
