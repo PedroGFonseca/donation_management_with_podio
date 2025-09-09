@@ -16,9 +16,9 @@ For example:
 - Allocation records enable both complex funding scenarios and automated bulk operations while maintaining perfect traceability.
 
 ## Key Relationships
-- Parent: [FundingBatch](fundingbatch.md) (source of the money)
-- Children: None
-- Links to: [Need](need.md) (recipient of the money)
+- **References**: FundingBatch (fundingbatch field), Need (need field)
+- **Referenced by**: None
+- **Implements**: FundingBatch ←→ Need many-to-many relationship
 
 ## Fields
 

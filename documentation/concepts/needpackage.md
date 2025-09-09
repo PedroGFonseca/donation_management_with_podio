@@ -10,9 +10,8 @@ To organize related funding requests into manageable units that can mix multiple
 NeedPackage enables clean UI organization without sacrificing individual tracking. It allows natural bundling of requests (like "School F new semester needs") while ensuring every recipient and amount is precisely tracked through individual Need records.
 
 ## Key Relationships
-- Parent: None (top-level request entity)
-- Children: Individual [Need](need.md) records (one per recipient per need type)
-- Links to: [Person](person.md)/[School](school.md)/[Group](group.md) records (recipients)
+- **References**: None (top-level request entity)
+- **Referenced by**: Need records (needpackage field in Need app)
 
 ## Fields
 

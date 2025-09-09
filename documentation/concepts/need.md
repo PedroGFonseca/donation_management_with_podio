@@ -10,9 +10,8 @@ To provide granular tracking of individual funding requirements while maintainin
 The [Need](need.md) entity enables both clean UI management (through [NeedPackage](needpackage.md)s) and detailed individual accountability. It ensures every recipient and amount is precisely tracked while supporting explicit funding allocation through the [Allocation](allocation.md) model.
 
 ## Key Relationships
-- Parent: [NeedPackage](needpackage.md) (the group request that contains this individual need)
-- Children: None (atomic unit)
-- Links to: [Allocation](allocation.md) records (explicit funding assignments), [Person](person.md)/[School](school.md)/[Group](group.md) (the specific recipient), [NeedTemplate](needtemplate.md) (if generated from template)
+- **References**: Person/School/Group (recipient field), NeedPackage (needpackage field)
+- **Referenced by**: Allocation records (need field in Allocation app)
 
 ## Fields
 

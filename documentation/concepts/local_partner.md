@@ -13,9 +13,8 @@ Certain partners are necessary for performing tasks the foundation cannot do on 
 ## Why it is needed 
 
 ## Key Relationships
-- Parent: [What contains this]
-- Children: [What this contains]
-- Links to: [What this connects to]
+- **References**: [To be defined based on actual Podio app fields]
+- **Referenced by**: [To be defined based on other apps that reference this entity]
 
 ## Fields
 <!-- Use - **Name** (Type): descrition-->

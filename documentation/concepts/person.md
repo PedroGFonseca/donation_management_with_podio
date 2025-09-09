@@ -10,9 +10,8 @@ To maintain current demographic and role information for individuals involved wi
 Person records serve as the foundation for recipient identification in the allocation system while maintaining clean current-state data. Historical tracking is handled through the SystemDiffs infrastructure, allowing the Person app to focus on operational needs without time-bound field clutter.
 
 ## Key Relationships
-- Parent: None (atomic entity)
-- Children: None (atomic entity)
-- Links to: [Need](need.md) records (as recipients), [Allocation](allocation.md) records (as recipients), [School](school.md) records (students/staff), [Group](group.md) records (family members), SystemDiffs (historical changes)
+- **References**: School (school field), Group (family field)
+- **Referenced by**: Need records (recipient field in Need app)
 
 ## Fields
 
